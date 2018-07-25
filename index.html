@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>密集架固定列系统</title>
+    <link rel="stylesheet" href="icomoon/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="./js/jquery-3.3.1.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="head">
+        <div class="logo">
+            <h1>密集架固定列系统</h1>
+        </div>
+        <div class="information">
+            <div class="item item-T">
+                <p>温度</p>
+                <div class="infor">36.0</div>
+            </div>
+            <div class="item item-T">
+                <p>湿度</p>
+                <div class="infor">36.0</div>
+            </div>
+            <div class="item item-PM">
+                <p>PM2.5</p>
+                <div class="infor">36.0</div>
+            </div>
+        </div>
+        <div class="logout">
+            <img src="image/icon/logout.png" alt="退出" onclick="closeWindow()">
+        </div>
+        <table>
+            <tr>
+                <th><span class="icon-shuq"></span> 标签</th>
+                <th><span class="icon-通知"></span> 公告</th>
+                <th><span class="icon-in"></span> 进出人数</th>
+            </tr>
+            <tr>
+                <td>重庆档案局某某某</td>
+                <td>重庆档案局某某某诗人档案</td>
+                <td>16人</td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <div class="c-header">
+            <div class="run">
+                <span class="light"></span>运行中
+            </div>
+            <div class="partition">
+                <div class="par par-active">1区</div>
+                <div class="par">2区</div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="b-container" id="content">
+            </div>
+        </div>
+        <div class="c-footer">
+            <div class="lock unlock">
+                <div class="icon-lock icon-unlock" id="locked" onclick="lock()">
+                    <span class="circle"></span>
+                </div>
+                <p>解锁</p>
+            </div>
+            <div class="direction">
+                <button class="btn prev" id="left" onclick="left()"></button>
+                <button class="btn next" id="right" onclick="right()"></button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="f-container">
+            <div class="f-items">
+                <div class="fIcon">
+                    <img src="./image/icon/自动开架.png" alt="自动开架">
+                </div>
+                <p>自动开架</p>
+            </div>
+            <div class="f-items">
+                <div class="fIcon">
+                    <img src="./image/icon/通风.png" alt="通风">
+                </div>
+                <p>通风</p>
+            </div>
+            <div class="f-items">
+                <div class="fIcon">
+                    <img src="./image/icon/合架.png" alt="合架">
+                </div>
+                <p>合架</p>
+            </div>
+            <div class="stop">
+                <div class="sIcon">
+                    <img src="image/icon/stop.png" alt="">
+                </div>
+            </div>
+            <div class="f-items">
+                <div class="fIcon">
+                    <a href="main/search.html">
+                        <img src="./image/icon/搜索.png" alt="查询">
+                    </a>
+                </div>
+                <p>查询</p>
+            </div>
+            <div class="f-items">
+                <div class="fIcon">
+                    <a href="main/history.html">
+                        <img src="./image/icon/历史纪录.png" alt="历史">
+                    </a>
+                </div>
+                <p>历史</p>
+            </div>
+            <div class="f-items">
+                <div class="fIcon">
+                    <img src="./image/icon/设置.png" alt="设置">
+                </div>
+                <p>系统设置</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/closeWindow.js"></script>
+<script type="text/javascript">
+    var total = 18;
+    var items = "";
+    var status = -1;
+    var item, index;
+    var positionStatus, _positionStatus;
+    let content = document.getElementById("content");
+    window.onload = function () {
+        for (let i = 0; i < total; i++) {
+            if (status == -1) {
+                if (i < 1) {
+                    items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + "00" + "</div>"
+                        + "<div class='i-body'>" + "<div class='i-window i-gWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                        + "</div>" + "</div>";
+                } else if (i > 0) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                        + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                        + "</div>" + "</div>";
+                }
+                content.innerHTML = items;
+                positionStatus = total;
+                $(".direction #left").attr("class", "btn prev disabled");
+            } else if (status == 0) {
+                let mid = Math.ceil(total / 2);
+                if (mid < 10) {
+                    if (i < mid) {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + "0" + i + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id=i></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    } else if (i === mid) {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + "0" + mid + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-gWindow' id=i></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    } else if (mid < i && i < 10) {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + "0" + i + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    } else {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    }
+                } else {
+                    if (i < 10) {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + "0" + i + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    } else if (i < mid) {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    } else if (i === mid) {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + mid + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-gWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    } else {
+                        items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                            + "</div>" + "</div>";
+                    }
+                }
+                let width = (total + 1) * 37;
+                content.style.paddingLeft = "37px";
+                content.style.width = width + "px";
+                content.innerHTML = items;
+                positionStatus = mid + 1;
+                _positionStatus = mid - 1;
+
+            } else if (status == 1) {
+                if (i < total - 1) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                        + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                        + "</div>" + "</div>";
+                }
+                else {
+                    items += "<div class='items'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                        + "<div class='i-body'>" + "<div class='i-window i-gWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
+                        + "</div>" + "</div>";
+                }
+                content.style.paddingLeft = "37px";
+                content.innerHTML = items;
+                $(".direction #right").attr("class", "btn prev disabled");
+                positionStatus = 0;
+            } else {
+                console.log("something wrong!")
+            }
+        }
+
+    };
+    $(document).on("click", ".items", function () {
+        item = $(this).find("#i-head").html();
+        index = parseInt(item);
+        if (!isNaN(item)) {
+            $(".items #i-head").removeClass("i-hActive");
+            $(".items #i-window").removeClass("i-wActive");
+            $(this).find("#i-head").attr("class", "i-head i-hActive");
+            if ($(this).find("#i-window").hasClass("i-window i-nWindow")) {
+                $(this).find("#i-window").attr("class", "i-window i-nWindow i-wActive");
+            } else {
+                $(this).find("#i-window").attr("class", "i-window i-gWindow i-wActive");
+            }
+        }
+    });
+    let locStatus = true;
+    var lock = function () {
+        if (locStatus) {
+            $("#locked").removeClass("icon-unlock");
+            $("#locked").attr("class", "icon-lock icon-locked");
+            $(".circle").animate({left: "33px"}, 100);
+            $(".lock").removeClass("unlock");
+            $(".lock").attr("class", "lock locked")
+            $(".lock").find("p").text("锁定");
+            $(".direction #left").attr("class", "btn prev disabled");
+            $(".direction #right").attr("class", "btn next disabled");
+            $(".direction button").attr("disabled", true);
+            locStatus = !locStatus;
+        } else {
+            $("#locked").removeClass("icon-locked");
+            $("#locked").attr("class", "icon-lock icon-unlock");
+            $(".circle").animate({left: "0"}, 100);
+            $(".lock").removeClass("locked");
+            $(".lock").attr("class", "lock unlock")
+            $(".lock").find("p").text("解锁");
+            if (status == -1 || positionStatus > index) {
+                $(".direction #left").attr("class", "btn prev disabled");
+                $(".direction #right").removeClass("btn next disabled");
+                $(".direction #right").attr("class", "btn next");
+                $(".direction #right").removeAttr("disabled");
+            } else if (status == 0) {
+                $(".direction #left").removeClass("btn prev disabled");
+                $(".direction #right").removeClass("btn next disabled");
+                $(".direction #left").attr("class", "btn prev");
+                $(".direction #right").attr("class", "btn next");
+                $(".direction button").removeAttr("disabled");
+            } else if (status == 1 || positionStatus < index) {
+                $(".direction #right").attr("class", "btn prev disabled");
+                $(".direction #left").removeClass("btn next disabled");
+                $(".direction #left").attr("class", "btn next");
+                $(".direction #left").removeAttr("disabled");
+            }
+            locStatus = !locStatus;
+        }
+    }
+    var left = function () {
+        let itemArray = document.getElementsByClassName("items");
+
+        for (let j = index; j < positionStatus; j++) {
+            $(itemArray[i])
+        }
+    }
+</script>
+</body>
+</html>

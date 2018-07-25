@@ -1,0 +1,376 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    width: 1024px;
+    height: 768px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #15a3f4, #0d5daf);
+}
+
+.head {
+    width: 100%;
+    height: 170px;
+    background-image: url("../image/background-jianbian.png");
+    overflow: hidden;
+}
+
+.logo {
+    margin-top: 10px;
+    margin-left: 25px;
+    color: #daebff;
+    font-size: 0;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.logo h1 {
+    font-size: 30px;
+}
+
+.information {
+    width: 520px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 130px;
+    font-size: 0;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.information p {
+    font-size: 20px;
+    margin-right: 0;
+    color: #9fcfff;
+    display: inline-block;
+}
+
+.item {
+    padding-top: 5px;
+    margin: 0 30px;
+    display: inline-block;
+}
+
+.item-T {
+    width: 100px;
+}
+
+.item-PM {
+    width: 120px;
+}
+
+.infor {
+    font-size: 22px;
+    margin-left: 10px;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.logout {
+    width: 56px;
+    height: 56px;
+    margin-top: 10px;
+    margin-right: 15px;
+    float: right;
+}
+
+.logout img {
+    width: 100%;
+    height: 100%;
+}
+
+table {
+    width: 95%;
+    margin-top: 20px;
+    font-size: 22px;
+    text-align: center;
+}
+
+table th {
+    height: 45px;
+    font-size: 20px;
+    font-weight: normal;
+    color: #9fcfff;
+    overflow: hidden;
+}
+
+table td {
+    font-size: 18px;
+    color: #fcfcfc;
+}
+
+.container {
+    width: 994px;
+    height: 356px;
+    margin: 53px auto 0;
+    background-color: rgba(102, 185, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 6px;
+}
+
+.c-header {
+    width: 100%;
+    height: 61px;
+    overflow: hidden;
+}
+
+.run {
+    width: 121px;
+    margin-top: 20px;
+    margin-left: 32px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    display: inline-block;
+}
+
+.light {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: #21f705;
+    box-shadow: 0 0 7px #33de1d;
+    margin-right: 25px;
+    display: inline-block;
+}
+
+.partition {
+    width: 150px;
+    height: 34px;
+    margin-top: 13px;
+    float: right;
+    margin-right: 26px;
+}
+
+.par {
+    width: 64px;
+    height: 100%;
+    margin-right: 6px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #bedeff;
+    text-align: center;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.par-active {
+    color: white;
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.body {
+    width: 100%;
+    height: 230px;
+    background-color: rgba(213, 233, 251, .2);
+}
+
+.b-container {
+    margin-top: 0;
+    margin-left:10px;
+}
+
+.items {
+    width: 36px;
+    height: 100%;
+    letter-spacing: -3px;
+    display: inline-block;
+    margin: 0 1px;
+    overflow: hidden;
+}
+
+.i-head {
+    width: 100%;
+    height: 24px;
+    margin-top: 10px;
+    border-radius: 3px;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-align: center;
+    color: #cde6ff;
+}
+
+.i-hActive {
+    background-color: #2688ec;
+    color: white;
+}
+
+.i-body {
+    width: 100%;
+    height: 174px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.i-window {
+    width: 24px;
+    background-color: #29444a;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.i-nWindow {
+    margin-top: 49px;
+    height: 14px;
+}
+
+.i-gWindow {
+    margin-top: 47px;
+    height: 16px;
+}
+
+.i-wActive {
+    background-color: #48a2ff;
+}
+
+.i-mid {
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+    background: linear-gradient(to bottom, #178aff, #1a75d2);
+}
+
+.c-footer {
+    width: 100%;
+    height: 65px;
+    overflow: hidden;
+}
+
+.lock {
+    width: 134px;
+    height: 37px;
+    margin-left: 29px;
+    margin-top: 14px;
+    display: inline-block;
+}
+.unlock{
+    color: #bedeff;
+}
+.locked{
+    color:#e74c3c;
+}
+
+.lock > p {
+    position: relative;
+    bottom: 7px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.icon-lock {
+    width: 70px;
+    height: 100%;
+    margin-top: -3px;
+    margin-right: 14px;
+    border-radius: 18.5px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.icon-unlock{
+    background-color: #21d709;
+}
+
+.icon-locked{
+    background-color: #e74c3c;
+}
+
+.circle {
+    position: relative;
+    display: block;
+    width: 33px;
+    height: 33px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.direction {
+    height: 46px;
+    margin-top: 10px;
+    margin-right: -12px;
+    float: right;
+    overflow: hidden;
+}
+
+.direction .btn {
+    border-style: none;
+    width: 40px;
+    height: 100%;
+    margin-right: 40px;
+    margin-left: 40px;
+    outline: none;
+    display: inline-block;
+}
+.prev{
+    background: url("../image/icon/prev.png");
+}
+.next{
+    background: url("../image/icon/next.png");
+}
+.disabled{
+    cursor: not-allowed;
+}
+
+.footer{
+    width: 100%;
+    height: 133px;
+    margin-top: 54px;
+    background-image: url("../image/background-footer.png");
+}
+.f-container{
+    width: 954px;
+    height: 100%;
+    margin: 0 auto;
+    overflow:hidden;
+}
+.f-items{
+    width: 64px;
+    height: 100%;
+    margin: 0 32px;
+    font-size: 16px;
+    color: #666666;
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+}
+.f-items > p{
+    margin-top: 10px;
+}
+.fIcon{
+    height: 60px;
+    width: 60px;
+    margin-top: 33px;
+    margin-left: 2px;
+}
+.fIcon img{
+    height: 100%;
+    width: 100%;
+}
+.stop{
+    width: 76px;
+    height: 100%;
+    margin: 0 32px;
+    display: inline-block;
+    overflow: hidden;
+}
+.sIcon{
+    width: 76px;
+    height: 76px;
+    margin-top: 38px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom,#178aff,#1a75d2);
+    overflow: hidden;
+}
+.stop img{
+    width: 23px;
+    height: 36px;
+    margin-top: 20px;
+    margin-left: 26px;
+}
