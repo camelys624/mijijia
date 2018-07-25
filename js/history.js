@@ -1,0 +1,50 @@
+var myDate=new Date();
+var table = new Vue({
+    el: '#table',
+    data:{
+        items:[
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+            {
+                operating:"解除",
+                position:"2区1列2节4层右侧",
+                date:myDate.toLocaleDateString(),
+                somebody:"Mir.凡"
+            },
+        ]
+    }
+})

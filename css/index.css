@@ -173,6 +173,7 @@ table td {
 }
 
 .items {
+    position: relative;
     width: 36px;
     height: 100%;
     letter-spacing: -3px;

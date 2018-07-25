@@ -271,11 +271,10 @@
             locStatus = !locStatus;
         }
     }
-    var left = function () {
+    var right = function () {
         let itemArray = document.getElementsByClassName("items");
-
-        for (let j = index; j < positionStatus; j++) {
-            $(itemArray[i])
+        for (let j = positionStatus; j > index; j--) {
+            $(itemArray[j]).animate({left: "37px"}, 2000);
         }
     }
 </script>

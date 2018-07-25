@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史记录</title>
+    <link rel="stylesheet" href="../css/search.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="head">
+        <div class="logo">
+            <h1>密集架固定列系统</h1>
+        </div>
+        <div class="return">
+            <p>历史</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="search-box">
+            <!--<select class="select">-->
+                <!--<option value="1">档案</option>-->
+            <!--</select>-->
+            <input type="text" class="input" placeholder="输入查询条件" required/>
+            <input type="submit" class="btn" value="搜索"/>
+        </div>
+        <table class="table" id="table">
+            <tr>
+                <th>操作</th>
+                <th>位置</th>
+                <th>操作时间</th>
+                <th>操作人</th>
+            </tr>
+            <tr v-for="item in items">
+                <td>{{item.operating}}</td>
+                <td>{{item.position}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.somebody}}</td>
+            </tr>
+        </table>
+        <div class="pager">
+            <button class="btn">首页</button>
+            <button class="btn">上一页</button>
+            <div class="page">1/1</div>
+            <button class="btn">下一页</button>
+            <button class="btn">末页</button>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="../index.html">&lt;返回</a>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="../js/history.js"></script>
+</html>
