@@ -181,6 +181,12 @@ table td {
     margin: 0 1px;
     overflow: hidden;
 }
+.r-items{
+    left:37px;
+}
+.its-right{
+    left: 37px;
+}
 
 .i-head {
     width: 100%;
