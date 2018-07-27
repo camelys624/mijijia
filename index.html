@@ -91,7 +91,7 @@
                 </div>
                 <p>合架</p>
             </div>
-            <div class="stop">
+            <div class="stop" onclick="runStop()">
                 <div class="sIcon">
                     <img src="image/icon/stop.png" alt="">
                 </div>
@@ -114,7 +114,9 @@
             </div>
             <div class="f-items">
                 <div class="fIcon">
-                    <img src="./image/icon/设置.png" alt="设置">
+                    <a href="main/setting.html">
+                        <img src="./image/icon/设置.png" alt="设置">
+                    </a>
                 </div>
                 <p>系统设置</p>
             </div>
@@ -123,18 +125,21 @@
 </div>
 <script type="text/javascript" src="js/closeWindow.js"></script>
 <script type="text/javascript">
-    var end = 18;
+    var end = 5;
     var head = 0;
-    var items = "";
-    var status = 1;
+    var leftHead, leftEnd,
+        rightHead, rightEnd;
+    var mid = Math.ceil(end / 2);
+    let items = "";
+    var status = -1;
+    var flag;
     var item, index;
-    var positionStatus, _positionStatus;
     let content = document.getElementById("content");
     window.onload = function () {
         for (let i = 0; i < end; i++) {
             if (status == -1) {
                 if (i < 1) {
-                    items += "<div class='items' id='fixed'>" + "<div class='i-head' id='i-head'>" + "00" + "</div>"
+                    items += "<div class='items-fixed' id='fixed'>" + "<div class='i-head' id='i-head'>" + "00" + "</div>"
                         + "<div class='i-body'>" + "<div class='i-window i-gWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
                         + "</div>" + "</div>";
                 } else if (i > 0) {
@@ -146,19 +151,16 @@
                         + "</div>" + "</div>";
                 }
                 content.innerHTML = items;
-                positionStatus = 0;
-                _positionStatus = end;
                 $(".direction #left").attr("class", "btn prev disabled");
             } else if (status == 0) {
-                let mid = Math.ceil(end / 2);
                 if (mid < 10) {
                     if (i < mid) {
                         items += "<div class='items r-items'>" + "<div class='i-head' id='i-head'>" + "0" + i + "</div>"
-                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id=i></div>" + "<div class='i-mid'></div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
                             + "</div>" + "</div>";
                     } else if (i === mid) {
-                        items += "<div class='items r-items' id='fixed'>" + "<div class='i-head' id='i-head'>" + "0" + mid + "</div>"
-                            + "<div class='i-body'>" + "<div class='i-window i-gWindow' id=i></div>" + "<div class='i-mid'></div>"
+                        items += "<div class='items-fixed r-items' id='fixed'>" + "<div class='i-head' id='i-head'>" + "0" + mid + "</div>"
+                            + "<div class='i-body'>" + "<div class='i-window i-gWindow'></div>" + "<div class='i-mid'></div>"
                             + "</div>" + "</div>";
                     } else if (mid < i && i < 10) {
                         items += "<div class='items r-items'>" + "<div class='i-head' id='i-head'>" + "0" + i + "</div>"
@@ -179,7 +181,7 @@
                             + "<div class='i-body'>" + "<div class='i-window i-nWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
                             + "</div>" + "</div>";
                     } else if (i === mid) {
-                        items += "<div class='items r-items' id='fixed'>" + "<div class='i-head' id='i-head'>" + mid + "</div>"
+                        items += "<div class='items-fixed r-items' id='fixed'>" + "<div class='i-head' id='i-head'>" + mid + "</div>"
                             + "<div class='i-body'>" + "<div class='i-window i-gWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
                             + "</div>" + "</div>";
                     } else {
@@ -188,13 +190,9 @@
                             + "</div>" + "</div>";
                     }
                 }
-                let width = (end + 1) * 37;
-                content.style.paddingLeft = "37px";
+                let width = (end + 2) * 37;
                 content.style.width = width + "px";
                 content.innerHTML = items;
-                positionStatus = mid - 1;
-                _positionStatus = mid + 1;
-
             } else if (status == 1) {
                 if (i < end - 1) {
                     if (i < 10) {
@@ -205,18 +203,17 @@
                         + "</div>" + "</div>";
                 }
                 else {
-                    items += "<div class='items r-items' id='fixed'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
+                    items += "<div class='items-fixed r-items' id='fixed'>" + "<div class='i-head' id='i-head'>" + i + "</div>"
                         + "<div class='i-body'>" + "<div class='i-window i-gWindow' id='i-window'></div>" + "<div class='i-mid'></div>"
                         + "</div>" + "</div>";
                 }
                 content.innerHTML = items;
                 $(".direction #right").attr("class", "btn next disabled");
-                positionStatus = 0;
-                _positionStatus = end;
             } else {
                 console.log("something wrong!")
             }
         }
+        end = end - 2;
 
     };
     $(document).on("click", ".items", function () {
@@ -232,26 +229,26 @@
                 $(this).find("#i-window").attr("class", "i-window i-gWindow i-wActive");
             }
         }
-        if (status == -1 || positionStatus > index || _positionStatus > index) {
-            //向右移动
-            $(".direction #left").attr("class", "btn prev disabled");
-            $(".direction #right").removeClass("btn next disabled");
-            $(".direction #right").attr("class", "btn next");
-            $(".direction #right").removeAttr("disabled");
-        } else if (status == 0) {
-            //两侧均可移动
-            $(".direction #left").removeClass("btn prev disabled");
-            $(".direction #right").removeClass("btn next disabled");
-            $(".direction #left").attr("class", "btn prev");
-            $(".direction #right").attr("class", "btn next");
-            $(".direction button").removeAttr("disabled");
-        } else if (status == 1 || positionStatus < index || _positionStatus < index) {
-            //向左移动
-            $(".direction #right").attr("class", "btn next disabled");
-            $(".direction #left").removeClass("btn prev disabled");
-            $(".direction #left").attr("class", "btn prev");
-            $(".direction #left").removeAttr("disabled");
-        }
+        // if (status == -1) {
+        //     //向右移动
+        //     $(".direction #left").attr("class", "btn prev disabled");
+        //     $(".direction #right").removeClass("btn next disabled");
+        //     $(".direction #right").attr("class", "btn next");
+        //     $(".direction #right").removeAttr("disabled");
+        // } else if (status == 0) {
+        //     //两侧均可移动
+        //     $(".direction #left").removeClass("btn prev disabled");
+        //     $(".direction #right").removeClass("btn next disabled");
+        //     $(".direction #left").attr("class", "btn prev");
+        //     $(".direction #right").attr("class", "btn next");
+        //     $(".direction button").removeAttr("disabled");
+        // } else if (status == 1) {
+        //     //向左移动
+        //     $(".direction #right").attr("class", "btn next disabled");
+        //     $(".direction #left").removeClass("btn prev disabled");
+        //     $(".direction #left").attr("class", "btn prev");
+        //     $(".direction #left").removeAttr("disabled");
+        // }
     });
     var locStatus = true;
     var lock = function () {
@@ -272,91 +269,114 @@
             $(".lock").removeClass("locked");
             $(".lock").attr("class", "lock unlock")
             $(".lock").find("p").text("解锁");
-            console.log(index);
         }
     }
     let itemsArray = document.getElementsByClassName("items");
     let fixed;
-    if(status == -1){
+    let backtracking, _backtracking;
+    if (status == -1) {
         fixed = 0;
-    }else if(status == 0){
-        fixed = Math.ceil(end / 2);
-    }else{
-        fixed = end - 1;
+    } else if (status == 0) {
+        fixed = mid;
+    } else {
+        fixed = 0;
+    }
+    leftHead = head;
+    leftEnd = mid;
+    rightHead = mid;
+    rightEnd = end;
+    var lInterval, rInterval;
+    var left = function () {
+        if (fixed == mid) {
+            if (index < mid) {
+                $(itemsArray[leftHead]).animate({left: "0"}, 5000);
+                lInterval = setInterval(function () {
+                    if (leftHead < flag) {
+                        $(itemsArray[leftHead + 1]).animate({left: "0"}, 5000);
+                        leftHead++;
+                        leftEnd = leftHead;
+                    }
+                }, 1500);
+                console.log("runLeft-L:", leftHead, leftEnd);
+            } else {
+                $(itemsArray[rightHead - 1]).animate({left: "37px"}, 5000);
+                lInterval = setInterval(function () {
+                    if (rightHead < flag) {
+                        $(itemsArray[rightHead]).animate({left: "37px"}, 5000);
+                        rightHead++;
+                        rightEnd = rightHead;
+                    }
+                }, 1500);
+                console.log("runLeft-R:", rightHead, rightEnd);
+            }
+        } else {
+            $(itemsArray[head - 1]).animate({left: "0"}, 5000);
+            lInterval = setInterval(function () {
+                if (head < flag) {
+                    $(itemsArray[head]).animate({left: "0"}, 5000);
+                    head++;
+                    end = head - 1;
+                    console.log("head:",head,"end:",end);
+                }
+            }, 1500);
+        }
+        flag = index;
     }
 
-    var lInterval, rInterval;
-    let flag;
-    var left = function () {
-        if(fixed == end - 1){         //固定列在右
-            $(itemsArray[head]).animate({left: "0"}, 5000);
-            lInterval = setInterval(function () {
-                if (head < flag + 1 && head < end - 1 ) {
-                    $(itemsArray[head + 1]).animate({left: "0"}, 5000);
-                    head++;
+    var right = function () {
+        if (fixed == mid) {
+            if (index < mid) {
+                $(itemsArray[leftEnd]).animate({left: "38px"}, 5000);
+                rInterval = setInterval(function () {
+                    if (flag < leftEnd) {
+                        $(itemsArray[leftEnd - 1]).animate({left: "38px"}, 5000);
+                        leftEnd--;
+                        leftHead = leftEnd;
+                    }
+                }, 1500);
+                console.log("runRight-F:", leftHead, leftEnd);
+            } else {
+                $(itemsArray[rightEnd - 1]).animate({left: "76px"}, 5000);
+                rInterval = setInterval(function () {
+                    if (flag < rightEnd) {
+                        $(itemsArray[rightEnd - 2]).animate({left: "76px"}, 5000);
+                        rightEnd--;
+                        rightHead = rightEnd;
+                    }
+                }, 1500);
+                console.log("runRight-R:", rightHead, rightEnd);
+            }
+        } else {
+            $(itemsArray[end]).animate({left: "38px"}, 5000);//这一句有问题
+            rInterval = setInterval(function () {
+                if (flag < end + 1) {
+                    $(itemsArray[end - 1]).animate({left: "38px"}, 5000);
+                    end--;
+                    head = end + 1;
+                    console.log("head:",head,"end:",end);
                 }
-            }, 1000);
-        }else if(fixed == Math.ceil(end / 2)){         //固定列在中
-            $(itemsArray[head]).animate({left: "0"}, 5000);
-            lInterval = setInterval(function () {
-                if (head < flag + 1 && flag < Math.ceil(end / 2) - 2) {
-                    $(itemsArray[head + 1]).animate({left: "0"}, 5000);
-                    head++;
-                }
-            }, 1000);
-        }else {                         //固定列在左
-            $(itemsArray[head]).animate({left: "0"}, 5000);
-            lInterval = setInterval(function () {
-                if (head < flag ) {
-                    $(itemsArray[head + 1]).animate({left: "0"}, 5000);
-                    head++;
-                }
-            }, 1000);
+            }, 1500);
         }
-        status = null;
-        positionStatus = index + 1;
         flag = index;
-        end = flag +1;
+
     }
+
     var runLeft = function () {
+        clearInterval(rInterval);
         clearInterval(lInterval);
         left();
     }
-    var right = function () {
-        if(fixed == end - 1){
-            $(itemsArray[end - 1]).animate({left: "37px"}, 4000);
-            rInterval = setInterval(function () {
-                if (flag < end  && end > 2) {
-                    $(itemsArray[end - 2]).animate({left: "37px"}, 4000);
-                    end--;
-                }
-            }, 1500);
-        }else if(fixed == Math.ceil(end / 2)){
-            $(itemsArray[end - 1]).animate({left: "37px"}, 4000);
-            rInterval = setInterval(function () {
-                if (flag < end && end > Math.ceil(end / 2) + 2) {
-                    $(itemsArray[end - 2]).animate({left: "37px"}, 4000);
-                    end--;
-                }
-            }, 1500);
-        }else{
-            $(itemsArray[end - 1]).animate({left: "37px"}, 5000);
-            rInterval = setInterval(function () {
-                if (flag < end ) {
-                    $(itemsArray[end - 1]).animate({left: "37px"}, 5000);
-                    end--;
-                }
-            }, 1500);
-        }
-        status = null;
-        flag = index;
-        head = flag;
-        _positionStatus = index - 1;
 
-    }
     var runRight = function () {
+        clearInterval(lInterval);
         clearInterval(rInterval);
         right();
+    }
+
+    var runStop = function () {
+        $(".items").stop();
+        clearInterval(lInterval);
+        clearInterval(rInterval);
     }
 </script>
 </body>
