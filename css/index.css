@@ -13,7 +13,7 @@
 .head {
     width: 100%;
     height: 170px;
-    background-image: url("../image/background-jianbian.png");
+    background: linear-gradient(to bottom,#0f70c2 0%,#0f70c2 15%,rgba(15,112,194,0) 100%);
     overflow: hidden;
 }
 
@@ -73,6 +73,7 @@
     height: 56px;
     margin-top: 10px;
     margin-right: 15px;
+    cursor: pointer;
     float: right;
 }
 
@@ -191,7 +192,7 @@ table td {
     overflow: hidden;
 }
 .r-items{
-    left:37px;
+    left:38px;
 }
 .its-right{
     left: 37px;
@@ -321,6 +322,7 @@ table td {
     height: 100%;
     margin-right: 40px;
     margin-left: 40px;
+    cursor: pointer;
     outline: none;
     display: inline-block;
 }
